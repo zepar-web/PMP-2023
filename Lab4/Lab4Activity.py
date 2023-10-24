@@ -14,7 +14,8 @@ def estimate_alpha(X):
     alpha = 10
     while True:
         T_total = total_time(alpha)
-        if (T_total > 15).any():
+        success = (T_total < 15).all()/X
+        if success >= 0.95:
             alpha -= 0.1
         else:
             return alpha

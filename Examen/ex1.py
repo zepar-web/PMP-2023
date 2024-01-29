@@ -59,10 +59,10 @@ def ex1():
     obs_std2 = [(30 - age_mean) / age_mean, 2]
     pm.set_data({"x_shared": [obs_std2]}, model=model)
 
-    ppc = pm.sample_posterior_predictive(idata, model=model, var_names=["theta"])
-    y_ppc = ppc.posterior_predictive['theta'].stack(sample=("chain", "draw")).values
+    pos_pred = pm.sample_posterior_predictive(idata, model=model, var_names=["theta"])
+    y_pos_pred = pos_pred.posterior_predictive['theta'].stack(sample=("chain", "draw")).values
     # construim intervalul de incredere de 90%, daca va supravietui sau nu
-    az.plot_posterior(y_ppc, hdi_prob=0.9)
+    az.plot_posterior(y_pos_pred, hdi_prob=0.9)
     plt.show()
 
 
